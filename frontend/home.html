@@ -1,69 +1,410 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Facebook - Home</title>
+  <title>Galit Sa Lahat - Facebook</title>
   <link rel="stylesheet" href="styles.css" />
+
   <style>
-    .home-wrap {
-      max-width: 600px;
-      margin: 60px auto;
+    body {
+      margin: 0;
+      background: #f0f2f5;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1c1e21;
+    }
+
+    .group-page {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+    }
+
+    /* Cover */
+    .cover-section {
+      height: 300px;
+      background: linear-gradient(135deg, #18191a, #3a3b3c, #111);
+      position: relative;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    .cover-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .cover-title {
+      color: white;
+      font-size: 48px;
+      font-weight: 700;
       text-align: center;
+      text-transform: lowercase;
+      text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
     }
-    .home-card {
-      max-width: 100%;
-      padding: 40px 30px;
+
+    /* Group information */
+    .group-info {
+      background: white;
+      padding: 25px 30px;
+      border-bottom: 1px solid #dddfe2;
     }
-    .home-card h1 {
-      font-size: 24px;
-      margin-bottom: 8px;
+
+    .group-info h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
     }
-    .home-card p {
-      color: var(--text-grey);
-      margin-bottom: 24px;
+
+    .group-description {
+      color: #65676b;
+      margin: 0 0 18px;
+      font-size: 15px;
+    }
+
+    .group-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: #65676b;
+      font-size: 14px;
+    }
+
+    .group-details span {
+      font-weight: 600;
+    }
+
+    /* Navigation */
+    .group-nav {
+      background: white;
+      padding: 0 20px;
+      display: flex;
+      gap: 5px;
+      border-bottom: 1px solid #dddfe2;
+    }
+
+    .group-nav a {
+      padding: 16px 20px;
+      color: #65676b;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+    }
+
+    .group-nav a:hover {
+      background: #f0f2f5;
+    }
+
+    .group-nav a.active {
+      color: #1877f2;
+      border-bottom-color: #1877f2;
+    }
+
+    /* Main content */
+    .content-area {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .info-card,
+    .post-card {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #dddfe2;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .info-card h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .info-card p {
+      color: #65676b;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .rule {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .rule:last-child {
+      border-bottom: none;
+    }
+
+    /* Welcome post */
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .group-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #18191a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .post-header strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .post-time {
+      color: #65676b;
+      font-size: 12px;
+    }
+
+    .post-card h2 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    .post-card p {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .join-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .join-button:hover {
+      background: #166fe5;
+    }
+
+    .logout-area {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .logout-area button {
+      padding: 10px 22px;
+      border: 1px solid #ccd0d5;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #65676b;
+    }
+
+    .logout-area button:hover {
+      background: #f0f2f5;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+      .cover-section {
+        height: 220px;
+        border-radius: 0;
+      }
+
+      .cover-title {
+        font-size: 34px;
+      }
+
+      .group-info {
+        padding: 20px;
+      }
+
+      .group-info h1 {
+        font-size: 25px;
+      }
+
+      .group-nav {
+        overflow-x: auto;
+      }
+
+      .group-nav a {
+        white-space: nowrap;
+        padding: 14px 15px;
+      }
+
+      .content-area {
+        grid-template-columns: 1fr;
+        margin: 15px;
+      }
     }
   </style>
 </head>
-<body class="auth-page">
- 
+
+<body>
+
+  <!-- Facebook-style header -->
   <header class="auth-header">
-    <a href="index.html" class="wordmark" style="display:inline-block;">facebook</a>
+    <a href="index.html" class="wordmark" style="display:inline-block;">
+      facebook
+    </a>
   </header>
- 
-  <main class="auth-main">
-    <div class="home-wrap">
-      <div class="card home-card">
-        <h1 id="welcome-heading">Welcome!</h1>
-        <p>You're logged in. This is a placeholder home page — a real news
-           feed, profile, and friends list would go here.</p>
-        <div class="center-btn-wrap">
-          <button id="logout-btn" class="btn btn-outline">Log Out</button>
+
+  <main class="group-page">
+
+    <!-- Cover -->
+    <section class="cover-section">
+      <div class="cover-overlay">
+        <div class="cover-title">
+          galit sa lahat
         </div>
       </div>
+    </section>
+
+    <!-- Group information -->
+    <section class="group-info">
+      <h1>Galit Sa Lahat</h1>
+
+      <p class="group-description">
+        A community for people who are tired of everything.
+        Rants, random thoughts, complaints, jokes, and anything
+        else that makes you say "galit na naman ako."
+      </p>
+
+      <div class="group-details">
+        <div>🌐 <span>Public group</span></div>
+        <div>👥 <span>12.4K members</span></div>
+        <div>📍 <span>Philippines</span></div>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="group-nav">
+      <a href="#" class="active">Posts</a>
+      <a href="#">About</a>
+      <a href="#">Members</a>
+      <a href="#">Photos</a>
+      <a href="#">Files</a>
+    </nav>
+
+    <!-- Content -->
+    <section class="content-area">
+
+      <!-- About card -->
+      <aside class="info-card">
+        <h2>About this group</h2>
+
+        <p>
+          Welcome to <strong>Galit Sa Lahat</strong> — a place where
+          everyone can share their daily frustrations, random
+          thoughts, and things they are annoyed about.
+        </p>
+
+        <div class="rule">
+          🤬 <strong>Rant freely</strong>
+        </div>
+
+        <div class="rule">
+          😂 <strong>Keep it funny</strong>
+        </div>
+
+        <div class="rule">
+          💬 <strong>Respect other members</strong>
+        </div>
+
+        <div class="rule">
+          🚫 <strong>No unnecessary drama</strong>
+        </div>
+      </aside>
+
+      <!-- Main post -->
+      <article class="post-card">
+
+        <div class="post-header">
+          <div class="group-avatar">
+            G
+          </div>
+
+          <div>
+            <strong>Galit Sa Lahat</strong>
+            <span class="post-time">Admin · Just now</span>
+          </div>
+        </div>
+
+        <h2>Welcome to Galit Sa Lahat! 🤬</h2>
+
+        <p>
+          Pagod ka na ba sa traffic?
+          Galit sa requirements?
+          Galit sa trabaho?
+          Galit sa panahon?
+          Galit kahit hindi mo alam kung bakit?
+        </p>
+
+        <p>
+          Welcome home. 😂
+        </p>
+
+        <p>
+          This is a place to share your thoughts, rants, memes,
+          experiences, and everything else that makes you want to
+          scream into the void.
+        </p>
+
+        <button class="join-button" id="join-btn">
+          Join Group
+        </button>
+
+      </article>
+
+    </section>
+
+    <!-- Logout -->
+    <div class="logout-area">
+      <button id="logout-btn">
+        Log Out
+      </button>
     </div>
+
   </main>
- 
+
   <footer class="site-footer">
     FacebookNgMgaGalit &middot; OPSV PRODUCTIONS &middot; &copy; 2026
   </footer>
- 
+
   <script>
-    // Pull the logged-in user's info that login.html saved to sessionStorage.
+    // Check logged-in user
     const raw = sessionStorage.getItem('fbCloneUser');
+
     if (!raw) {
-      // No session found (e.g. page opened directly) — send back to login.
       window.location.href = 'login.html';
-    } else {
-      const user = JSON.parse(raw);
-      document.getElementById('welcome-heading').textContent =
-        `Welcome, ${user.firstName}!`;
     }
- 
+
+    // Join group button
+    document.getElementById('join-btn').addEventListener('click', function () {
+      this.textContent = 'Joined ✓';
+      this.style.background = '#42b72a';
+    });
+
+    // Logout
     document.getElementById('logout-btn').addEventListener('click', () => {
       sessionStorage.removeItem('fbCloneUser');
       window.location.href = 'login.html';
     });
   </script>
+
 </body>
 </html>
+```
