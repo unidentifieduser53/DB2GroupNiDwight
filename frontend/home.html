@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facebook - Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .home-wrap {
+      max-width: 600px;
+      margin: 60px auto;
+      text-align: center;
+    }
+    .home-card {
+      max-width: 100%;
+      padding: 40px 30px;
+    }
+    .home-card h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .home-card p {
+      color: var(--text-grey);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body class="auth-page">
+ 
+  <header class="auth-header">
+    <a href="index.html" class="wordmark" style="display:inline-block;">facebook</a>
+  </header>
+ 
+  <main class="auth-main">
+    <div class="home-wrap">
+      <div class="card home-card">
+        <h1 id="welcome-heading">Welcome!</h1>
+        <p>You're logged in. This is a placeholder home page — a real news
+           feed, profile, and friends list would go here.</p>
+        <div class="center-btn-wrap">
+          <button id="logout-btn" class="btn btn-outline">Log Out</button>
+        </div>
+      </div>
+    </div>
+  </main>
+ 
+  <footer class="site-footer">
+    Facebook Clone &middot; Built for demo purposes &middot; &copy; 2026
+  </footer>
+ 
+  <script>
+    // Pull the logged-in user's info that login.html saved to sessionStorage.
+    const raw = sessionStorage.getItem('fbCloneUser');
+    if (!raw) {
+      // No session found (e.g. page opened directly) — send back to login.
+      window.location.href = 'login.html';
+    } else {
+      const user = JSON.parse(raw);
+      document.getElementById('welcome-heading').textContent =
+        `Welcome, ${user.firstName}!`;
+    }
+ 
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      sessionStorage.removeItem('fbCloneUser');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
