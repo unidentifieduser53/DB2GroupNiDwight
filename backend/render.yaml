@@ -1,0 +1,20 @@
+# Optional: Render can read this file to pre-fill a new Web Service
+# ("New +" -> "Blueprint" in the Render dashboard, pointed at this repo).
+# You can also skip this entirely and configure the service by hand in the
+# dashboard, following the README steps.
+
+services:
+  - type: web
+    name: facebook-clone-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: PORT
+        value: 5000

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up for Facebook</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="auth-page">
+
+  <header class="auth-header">
+    <a href="index.html" class="wordmark" style="display:inline-block;">facebook</a>
+  </header>
+
+  <main class="auth-main">
+    <div class="card signup-card">
+      <h1>Create a new account</h1>
+      <p class="subtitle">It's quick and easy.</p>
+      <hr class="divider" style="margin: 14px 0;" />
+
+      <form id="signup-form" novalidate>
+        <p class="error-text" id="signup-error"></p>
+
+        <div class="name-row">
+          <input type="text" id="first-name" placeholder="First name" required />
+          <input type="text" id="last-name" placeholder="Surname" required />
+        </div>
+
+        <input type="email" id="signup-email" placeholder="Email address" required />
+        <input type="password" id="signup-password" placeholder="New password" required minlength="6" />
+
+        <div class="field-group">
+          <label class="dob-gender-label">Date of birth</label>
+          <div class="dob-row">
+            <select id="dob-day" required>
+              <option value="">Day</option>
+            </select>
+            <select id="dob-month" required>
+              <option value="">Month</option>
+            </select>
+            <select id="dob-year" required>
+              <option value="">Year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="dob-gender-label">Gender</label>
+          <div class="gender-row">
+            <label class="gender-option">Female <input type="radio" name="gender" value="female" required /></label>
+            <label class="gender-option">Male <input type="radio" name="gender" value="male" /></label>
+            <label class="gender-option">Custom <input type="radio" name="gender" value="custom" /></label>
+          </div>
+        </div>
+
+        <p class="terms-text">
+          By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy.
+          You may receive account-related notifications and can opt out at any time.
+        </p>
+
+        <div class="center-btn-wrap">
+          <button type="submit" class="btn btn-green btn-block" style="max-width:220px;">Sign Up</button>
+        </div>
+      </form>
+
+      <p class="create-account-note">
+        Already have an account? <a href="login.html">Log in</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    Facebook Clone &middot; Built for demo purposes &middot; &copy; 2026
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Populate day / month / year selects
+    const dayEl = document.getElementById('dob-day');
+    const monthEl = document.getElementById('dob-month');
+    const yearEl = document.getElementById('dob-year');
+
+    for (let d = 1; d <= 31; d++) {
+      dayEl.appendChild(new Option(d, d));
+    }
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    months.forEach((m, i) => monthEl.appendChild(new Option(m, i + 1)));
+
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear; y >= currentYear - 100; y--) {
+      yearEl.appendChild(new Option(y, y));
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const errorEl = document.getElementById('signup-error');
+      errorEl.classList.remove('show');
+
+      const firstName = document.getElementById('first-name').value.trim();
+      const lastName = document.getElementById('last-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const day = dayEl.value, month = monthEl.value, year = yearEl.value;
+
+      if (!firstName || !lastName || !email || !password || !gender || !day || !month || !year) {
+        errorEl.textContent = 'Please fill in all fields to sign up.';
+        errorEl.classList.add('show');
+        return;
+      }
+      if (password.length < 6) {
+        errorEl.textContent = 'Password should be at least 6 characters.';
+        errorEl.classList.add('show');
+        return;
+      }
+
+      const payload = {
+        firstName,
+        lastName,
+        email,
+        password,
+        gender: gender.value,
+        birthday: `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+      };
+
+      try {
+        // Calls the /api/signup endpoint from the Node/Express + MongoDB backend
+        // (see server.js). The base URL is set in script.js (API_BASE_URL).
+        const res = await fetch(`${apiBaseUrl()}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorEl.textContent = data.message || 'Sign up failed. Please try again.';
+          errorEl.classList.add('show');
+          return;
+        }
+
+        alert('Account created! You can now log in.');
+        window.location.href = 'login.html';
+      } catch (err) {
+        errorEl.textContent = 'Could not reach the server. Is the backend running?';
+        errorEl.classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>

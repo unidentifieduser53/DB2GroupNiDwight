@@ -1,0 +1,323 @@
+/* ===== Facebook Clone - Shared Styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --fb-blue: #1877f2;
+  --fb-blue-dark: #166fe5;
+  --fb-green: #42b72a;
+  --fb-green-dark: #36a420;
+  --text-dark: #1c1e21;
+  --text-grey: #606770;
+  --border-grey: #dddfe2;
+  --bg-grey: #f0f2f5;
+  --white: #ffffff;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: var(--bg-grey);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: var(--fb-blue);
+}
+
+/* ---------- Top bar (landing page) ---------- */
+.top-bar {
+  width: 100%;
+  padding: 14px 5%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--fb-blue);
+  border: 1px solid var(--fb-blue);
+}
+
+.btn-outline:hover {
+  background-color: rgba(24, 119, 242, 0.06);
+}
+
+.btn-primary {
+  background-color: var(--fb-blue);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--fb-blue-dark);
+}
+
+.btn-green {
+  background-color: var(--fb-green);
+  color: var(--white);
+}
+
+.btn-green:hover {
+  background-color: var(--fb-green-dark);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- Landing layout ---------- */
+.landing-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 20px 60px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.landing-intro {
+  flex: 1 1 480px;
+  padding-top: 30px;
+}
+
+.wordmark {
+  color: var(--fb-blue);
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.landing-intro p {
+  font-size: 22px;
+  line-height: 1.35;
+  max-width: 500px;
+  color: var(--text-dark);
+}
+
+.landing-form-col {
+  flex: 1 1 380px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- Card / form box ---------- */
+.card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 396px;
+  padding: 20px;
+}
+
+.card input[type="text"],
+.card input[type="email"],
+.card input[type="password"],
+.card input[type="tel"],
+.card select {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 17px;
+  border: 1px solid var(--border-grey);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.card input:focus,
+.card select:focus {
+  border-color: var(--fb-blue);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-grey);
+  margin: 20px 0;
+}
+
+.forgot-link {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.center-btn-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.small-print {
+  font-size: 12px;
+  color: var(--text-grey);
+  text-align: center;
+  margin-top: 18px;
+  line-height: 1.4;
+}
+
+.create-account-note {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+/* ---------- Standalone auth pages (login / signup) ---------- */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-header {
+  padding: 16px 5%;
+}
+
+.auth-header .wordmark {
+  font-size: 32px;
+  margin-bottom: 0;
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+.signup-card {
+  max-width: 432px;
+}
+
+.signup-card h1 {
+  font-size: 27px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.signup-card .subtitle {
+  text-align: center;
+  color: var(--text-grey);
+  font-size: 17px;
+  margin-bottom: 16px;
+}
+
+.name-row {
+  display: flex;
+  gap: 10px;
+}
+
+.name-row input {
+  flex: 1;
+}
+
+.field-group {
+  margin-bottom: 12px;
+}
+
+.field-label {
+  font-size: 12px;
+  color: var(--text-grey);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.field-hint {
+  font-size: 11px;
+  color: var(--text-grey);
+  margin: -4px 0 12px;
+  line-height: 1.4;
+}
+
+.dob-gender-label {
+  font-size: 12px;
+  color: var(--text-grey);
+  margin-bottom: 4px;
+}
+
+.dob-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.dob-row select {
+  margin-bottom: 0;
+}
+
+.gender-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.gender-option {
+  flex: 1;
+  border: 1px solid var(--border-grey);
+  border-radius: 6px;
+  padding: 10px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.terms-text {
+  font-size: 11px;
+  color: var(--text-grey);
+  line-height: 1.4;
+  margin: 8px 0 16px;
+}
+
+.error-text {
+  color: #d93025;
+  font-size: 13px;
+  margin: -4px 0 10px;
+  display: none;
+}
+
+.error-text.show {
+  display: block;
+}
+
+footer.site-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-grey);
+  padding: 30px 20px;
+}
+
+@media (max-width: 700px) {
+  .wordmark {
+    font-size: 40px;
+    text-align: center;
+  }
+  .landing-intro p {
+    font-size: 18px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .landing-wrap {
+    flex-direction: column;
+    text-align: center;
+  }
+}
