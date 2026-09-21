@@ -5,7 +5,7 @@
 //
 //   Local dev:    http://localhost:5000/api
 //   Production:   https://YOUR-BACKEND-NAME.onrender.com/api
-const API_BASE_URL = 'https://db2groupnidwight.onrender.com';
+const API_BASE_URL = 'https://db2groupnidwight.onrender.com/api';
 
 function apiBaseUrl() {
   return API_BASE_URL;
