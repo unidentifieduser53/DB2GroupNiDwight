@@ -7,37 +7,37 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="auth-page">
-
+ 
   <header class="auth-header">
     <a href="index.html" class="wordmark" style="display:inline-block;">facebook</a>
   </header>
-
+ 
   <main class="auth-main">
     <div class="card">
       <form id="login-form" novalidate>
         <p class="error-text" id="login-error">Please check your email/phone and password and try again.</p>
-
+ 
         <input type="text" id="login-email" placeholder="Email address or phone number" required />
         <input type="password" id="login-password" placeholder="Password" required />
-
+ 
         <div class="center-btn-wrap">
           <button type="submit" class="btn btn-primary btn-block">Log In</button>
         </div>
-
+ 
         <a href="#" class="forgot-link" style="margin-top:14px;">Forgotten password?</a>
         <hr class="divider" />
-
+ 
         <div class="center-btn-wrap">
           <a href="signup.html" class="btn btn-green">Create New Account</a>
         </div>
       </form>
     </div>
   </main>
-
+ 
   <footer class="site-footer">
-    FacebookNgMgaGalit &middot; OPSV PRODUCTION &middot; &copy; 2026
+    Facebook Clone &middot; Built for demo purposes &middot; &copy; 2026
   </footer>
-
+ 
   <script src="script.js"></script>
   <script>
     document.getElementById('login-form').addEventListener('submit', async function (e) {
@@ -46,13 +46,13 @@
       const password = document.getElementById('login-password').value;
       const errorEl = document.getElementById('login-error');
       errorEl.classList.remove('show');
-
+ 
       if (!email || !password) {
         errorEl.textContent = 'Please fill in both fields.';
         errorEl.classList.add('show');
         return;
       }
-
+ 
       try {
         // Calls the /api/login endpoint from the Node/Express + MongoDB backend
         // (see server.js). The base URL is set in script.js (API_BASE_URL).
@@ -62,15 +62,16 @@
           body: JSON.stringify({ email, password })
         });
         const data = await res.json();
-
+ 
         if (!res.ok) {
           errorEl.textContent = data.message || 'Login failed. Please try again.';
           errorEl.classList.add('show');
           return;
         }
-
-        // On success, the backend can return a token/user object here.
-        alert('Logged in successfully!');
+ 
+        // Save the logged-in user for home.html to read, then redirect.
+        sessionStorage.setItem('fbCloneUser', JSON.stringify(data.user));
+        window.location.href = 'home.html';
       } catch (err) {
         errorEl.textContent = 'Could not reach the server. Is the backend running?';
         errorEl.classList.add('show');
@@ -79,3 +80,4 @@
   </script>
 </body>
 </html>
+ 
